@@ -1,25 +1,4 @@
-FROM jenkins
-
-USER root
-
-RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - \
-    && echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get install --no-install-recommends --no-install-suggests -y \
-                        ca-certificates \
-                        nginx \
-    && rm -rf /var/lib/apt/lists/*
-
-# forward request and error logs to docker log collector
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
-
-EXPOSE 80 443
-ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/entrypoint.sh", "/usr/local/bin/jenkins.sh"]
-
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-COPY jenkins.conf /etc/nginx/conf.d/jenkins.conf
-COPY plugin.json /usr/share/nginx/html/plugin.json
+FROM daocloud.io/nginx
 
 LABEL io.daocloud.dce.plugin.name="Jenkins" \
       io.daocloud.dce.plugin.description="Jenkins 的前身是 Hudson 是一个可扩展的持续集成引擎" \
@@ -29,3 +8,5 @@ LABEL io.daocloud.dce.plugin.name="Jenkins" \
       io.daocloud.dce.plugin.required-dce-version=">=2.2.0" \
       io.daocloud.dce.plugin.nano-cpus-limit="500000000" \
       io.daocloud.dce.plugin.memory-bytes-limit="52428800"
+
+COPY jenkins.conf /etc/nginx/conf.d/jenkins.conf
