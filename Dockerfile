@@ -1,20 +1,13 @@
 FROM jenkins
 
 USER root
-ENV NGINX_VERSION 1.11.9-1~jessie
 
 RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - \
     && echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y \
                         ca-certificates \
-                        nginx=${NGINX_VERSION} \
-                        nginx-module-xslt \
-                        nginx-module-geoip \
-                        nginx-module-image-filter \
-                        nginx-module-perl \
-                        nginx-module-njs \
-                        gettext-base \
+                        nginx \
     && rm -rf /var/lib/apt/lists/*
 
 # forward request and error logs to docker log collector
