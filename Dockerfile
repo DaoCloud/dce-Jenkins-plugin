@@ -3,7 +3,8 @@ FROM jenkins
 USER root
 ENV NGINX_VERSION 1.11.9-1~jessie
 
-RUN echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
+RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - \
+    && echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y \
                         ca-certificates \
