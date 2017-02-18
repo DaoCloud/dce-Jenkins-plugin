@@ -10,5 +10,4 @@ LABEL io.daocloud.dce.plugin.name="Jenkins" \
       io.daocloud.dce.plugin.memory-bytes-limit="52428800"
 
 COPY nginx.conf /etc/nginx/conf.d/nginx.conf
-COPY plugin.json /usr/share/nginx/html/plugin.json
-COPY index.html /usr/share/nginx/html/index.html
+COPY . /usr/share/nginx/html/
