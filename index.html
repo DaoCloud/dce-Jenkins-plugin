@@ -15,7 +15,7 @@ function runCount(t,endFunc){
 }
 
 function forwardHttps(url){
-	$("#forwardHttps").css("visibility","visible");
+	$("#forwardHttps").show();
 	runCount(3,function(){
 		window.location.href=url; 
 	});
@@ -32,7 +32,7 @@ function forward(url){
 		forwardHttps(url);
 	}else{
 		if(dceUrl.startsWith('https://')){
-			suggestUseHttp(url);
+			$("#suggestUseHttp").show();
 		}else{
 			window.location.href=url; 
 		}
@@ -41,17 +41,16 @@ function forward(url){
 }
 
 $(document).ready(function(){
-
-var url="https://www.baidu.com/";
-$(".url").attr("href",url);
-forward(url);	
+	var url="http://www.baidu.com/";
+	$(".url").attr("href",url);
+	forward(url);	
 });
 
 
 	</script>
 </head>
 <body>
-<div id='forwardHttps' style="visibility: hidden;">
+<div id='forwardHttps' style="display: none;">
 正在跳转到一个HTTPS页面，
 
 <p>
@@ -60,6 +59,15 @@ forward(url);
 
 如果该页面无法显示，有可能是使用了自定义SSL证书。
 可以<a class="url" href="" target="_blank">打开此页面</a>，接受SSL证书解决
+</div>
+
+<div id='suggestUseHttp' style="display: none;">
+<p>
+无法打开该页面，因为违法了浏览器安全规则。
+你的浏览器现在正在使用HTTPS，该插件使用了HTTP。
+</p><p>
+请使用HTTP操作DCE，可以在“设置->SSL”将系统调整为不强制使用SSL。
+</p>
 </div>
 
 </body>
