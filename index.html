@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Jenkins</title>
+	<title>DaoCloud Enterprise</title>
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
 	<script type="text/javascript">
-window.location.href="https://54.223.84.133:30008/"; 
+
+function runCount(t,endFunc){
+  if(t>0){
+  	$("#count").text(t);
+    setTimeout(function(){runCount(t-1,endFunc);},1000);
+  }else{
+  	endFunc();
+  }
+}
+
+function forwardHttps(url){
+	$("#forwardHttps").css("visibility","visible");
+	runCount(3,function(){
+		window.location.href=url; 
+	});
+}
+
+function suggestUseHttp(url){
+	alert('suggestUseHttp')
+}
+
+function forward(url){
+
+	dceUrl=window.location.href;
+	if(url.startsWith('https://')){
+		forwardHttps(url);
+	}else{
+		if(dceUrl.startsWith('https://')){
+			suggestUseHttp(url);
+		}else{
+			window.location.href=url; 
+		}
+	}
+
+}
+
+$(document).ready(function(){
+
+var url="https://www.baidu.com/";
+$(".url").attr("href",url);
+forward(url);	
+});
+
+
 	</script>
 </head>
 <body>
+<div id='forwardHttps' style="visibility: hidden;">
+正在跳转到一个HTTPS页面，
+
+<p>
+<span id="count"></span>...
+</p>
+
+如果该页面无法显示，有可能是使用了自定义SSL证书。
+可以<a class="url" href="" target="_blank">打开此页面</a>，接受SSL证书解决
+</div>
 
 </body>
 </html>
