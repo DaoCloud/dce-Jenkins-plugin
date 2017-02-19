@@ -1,4 +1,4 @@
-FROM daocloud.io/nginx
+FROM daocloud.io/python:2.7-alpine
 
 LABEL io.daocloud.dce.plugin.name="Jenkins" \
       io.daocloud.dce.plugin.description="Jenkins 的前身是 Hudson 是一个可扩展的持续集成引擎" \
@@ -9,5 +9,12 @@ LABEL io.daocloud.dce.plugin.name="Jenkins" \
       io.daocloud.dce.plugin.nano-cpus-limit="500000000" \
       io.daocloud.dce.plugin.memory-bytes-limit="52428800"
 
-COPY nginx.conf /etc/nginx/conf.d/nginx.conf
+
+RUN apk add --update \
+    nginx \
+  && rm -rf /var/cache/apk/*
+
+COPY plugin.conf /etc/nginx/conf.d/plugin.conf
+COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY . /usr/share/nginx/html/
