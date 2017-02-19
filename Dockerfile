@@ -14,6 +14,8 @@ RUN apk add --update \
     nginx \
   && rm -rf /var/cache/apk/*
 
+CMD ["nginx","-g","daemon off;"]
+
 COPY plugin.conf /etc/nginx/conf.d/plugin.conf
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
