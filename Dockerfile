@@ -11,12 +11,14 @@ LABEL io.daocloud.dce.plugin.name="Jenkins" \
 
 
 RUN apk add --update \
-    nginx \
+    nginx supervisor \
   && rm -rf /var/cache/apk/* \
   && ln -sf /dev/stdout /var/log/nginx/access.log \
   && ln -sf /dev/stderr /var/log/nginx/error.log
 
-CMD ["nginx","-g","daemon off;"]
+CMD ["/usr/local/bin/supervisord.sh"]
 
 COPY nginx /etc/nginx/
 COPY html /usr/share/nginx/html/
+
+COPY supervisord.sh /usr/local/bin/
