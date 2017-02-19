@@ -18,5 +18,5 @@ RUN apk add --update \
 
 CMD ["nginx","-g","daemon off;"]
 
-COPY plugin /etc/nginx/
+COPY nginx /etc/nginx/
 COPY html /usr/share/nginx/html/
