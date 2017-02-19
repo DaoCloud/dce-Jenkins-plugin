@@ -18,7 +18,5 @@ RUN apk add --update \
 
 CMD ["nginx","-g","daemon off;"]
 
-COPY plugin.conf /etc/nginx/conf.d/plugin.conf
-COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY . /usr/share/nginx/html/
+COPY plugin /etc/nginx/
+COPY html /usr/share/nginx/html/
