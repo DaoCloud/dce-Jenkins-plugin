@@ -1,74 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DaoCloud Enterprise</title>
-	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
-	<script type="text/javascript">
-
-function runCount(t,endFunc){
-  if(t>0){
-  	$("#count").text(t);
-    setTimeout(function(){runCount(t-1,endFunc);},1000);
-  }else{
-  	endFunc();
-  }
-}
-
-function forwardHttps(url){
-	$("#forwardHttps").show();
-	runCount(3,function(){
-		window.location.href=url; 
-	});
-}
-
-function suggestUseHttp(url){
-	alert('suggestUseHttp')
-}
-
-function forward(url){
-
-	dceUrl=window.location.href;
-	if(url.startsWith('https://')){
-		forwardHttps(url);
-	}else{
-		if(dceUrl.startsWith('https://')){
-			$("#suggestUseHttp").show();
-		}else{
-			window.location.href=url; 
-		}
-	}
-
-}
-
-$(document).ready(function(){
-	var url="http://www.baidu.com/";
-	$(".url").attr("href",url);
-	forward(url);	
-});
-
-
-	</script>
+	<title>Jenkins</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap.min.js"></script>
 </head>
 <body>
-<div id='forwardHttps' style="display: none;">
-正在跳转到一个HTTPS页面，
-
-<p>
-<span id="count"></span>...
-</p>
-
-如果该页面无法显示，有可能是使用了自定义SSL证书。
-可以<a class="url" href="" target="_blank">打开此页面</a>，接受SSL证书解决
-</div>
-
-<div id='suggestUseHttp' style="display: none;">
-<p>
-无法打开该页面，因为违法了浏览器安全规则。
-你的浏览器现在正在使用HTTPS，该插件使用了HTTP。
-</p><p>
-请使用HTTP操作DCE，可以在“设置->SSL”将系统调整为不强制使用SSL。
-</p>
-</div>
-
+	<div class="container" style="margin-top: 50px;">
+		<div id="tips" style="text-align: center;"></div>
+		<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Jenkins 模块配置</h4>
+		      </div>
+		      <div class="modal-body">
+		        <form class="form-horizontal">
+						  <div class="form-group">
+						    <label for="url" class="col-sm-3 control-label">Jenkins WEB 地址</label>
+						    <div class="col-sm-9">
+						      <input type="text" class="form-control" id="url" placeholder="例：http://192.168.1.100:8080">
+						    </div>
+						  </div>
+						</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		        <button type="button" class="btn btn-success" id="submit">确定</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	</div>
+	<script type="text/javascript" src="index.js"></script>
 </body>
 </html>

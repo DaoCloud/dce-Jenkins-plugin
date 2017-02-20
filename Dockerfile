@@ -9,6 +9,9 @@ LABEL io.daocloud.dce.plugin.name="Jenkins" \
       io.daocloud.dce.plugin.nano-cpus-limit="500000000" \
       io.daocloud.dce.plugin.memory-bytes-limit="52428800"
 
+# to be faster DELETE IT
+RUN echo "https://mirrors.ustc.edu.cn/alpine/v3.3/main" > /etc/apk/repositories
+RUN echo "https://mirrors.ustc.edu.cn/alpine/v3.3/community" >> /etc/apk/repositories
 
 RUN apk add --update \
     nginx supervisor \
@@ -16,9 +19,14 @@ RUN apk add --update \
   && ln -sf /dev/stdout /var/log/nginx/access.log \
   && ln -sf /dev/stderr /var/log/nginx/error.log
 
-CMD ["/usr/local/bin/supervisord.sh"]
+COPY ./requirements.txt /usr/src/
+RUN pip install -r /usr/src/requirements.txt -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com
 
 COPY nginx /etc/nginx/
 COPY html /usr/share/nginx/html/
+COPY app.py /usr/local/bin/
 
 COPY supervisord.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/supervisord.sh
+
+CMD ["sh", "/usr/local/bin/supervisord.sh"]
