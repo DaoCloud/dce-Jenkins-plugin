@@ -9,10 +9,6 @@ LABEL io.daocloud.dce.plugin.name="Jenkins" \
       io.daocloud.dce.plugin.nano-cpus-limit="500000000" \
       io.daocloud.dce.plugin.memory-bytes-limit="52428800"
 
-# to be faster DELETE IT
-RUN echo "https://mirrors.ustc.edu.cn/alpine/v3.3/main" > /etc/apk/repositories
-RUN echo "https://mirrors.ustc.edu.cn/alpine/v3.3/community" >> /etc/apk/repositories
-
 RUN apk add --update \
     nginx supervisor \
   && rm -rf /var/cache/apk/* \
