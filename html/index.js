@@ -82,7 +82,7 @@ function changeUrl(url) {
 			} else {
 				$("#myModal").modal('hide');
 				var tips = $('<div style="text-align: center;font-size: 30px;font-weight: 400;" id="count">3</div>\
-					<div>如果无法显示，可以<a class="url" href="' + url + '" target="_blank">打开此页面</a>，接受 SSL 证书来解决。</div>');
+					<div>如果无法显示，可以<a class="url" href="' + url + '" target="_blank">打开此页面</a>，接受 SSL 证书解决。</div>');
 
 				$('#tips').append(tips);
 				countDown($("#count"), function(){
@@ -94,6 +94,7 @@ function changeUrl(url) {
 		if (checkHttps(window.location.origin)) {
 			$('#tips').html('<p>无法打开该页面，因为违法了浏览器安全规则。你的浏览器现在正在使用 HTTPS，该插件使用了 HTTP。</p>\
 				<p>请使用 HTTP 操作 DCE，可以在“设置 -> SSL”将系统调整为不强制使用 SSL。</p>');
+			$("#myModal").modal('hide');
 		} else {
 			window.location.href = url;
 		}
