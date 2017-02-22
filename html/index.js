@@ -82,7 +82,7 @@ function changeUrl(url) {
 			} else {
 				$("#myModal").modal('hide');
 				var tips = $('<div style="text-align: center;font-size: 30px;font-weight: 400;" id="count">3</div>\
-					<div>如果无法显示。可以<a class="url" href="' + url + '" target="_blank">打开此页面</a>，接受 SSL 证书解决。</div>');
+					<div>如果无法显示，可以<a class="url" href="' + url + '" target="_blank">打开此页面</a>，接受 SSL 证书来解决。</div>');
 
 				$('#tips').append(tips);
 				countDown($("#count"), function(){
