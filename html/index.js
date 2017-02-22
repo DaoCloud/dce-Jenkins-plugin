@@ -75,7 +75,7 @@ function countDown(el, callback) {
 
 // 跳转
 function changeUrl(url) {
-	if (!checkHttps(url)) {
+	if (checkHttps(url)) {
 		pluginInsecure(url, function(res) {
 			if (res) {
 				window.location.href = url;
