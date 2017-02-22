@@ -92,8 +92,8 @@ function changeUrl(url) {
 		})
 	} else {
 		if (checkHttps(window.location.origin)) {
-			$('#tips').html('<p>无法打开该页面，因为违法了浏览器安全规则。你的浏览器现在正在使用HTTPS，该插件使用了HTTP。</p>\
-				<p>请使用HTTP操作DCE，可以在“设置->SSL”将系统调整为不强制使用SSL。</p>');
+			$('#tips').html('<p>无法打开该页面，因为违法了浏览器安全规则。你的浏览器现在正在使用 HTTPS，该插件使用了 HTTP。</p>\
+				<p>请使用 HTTP 操作 DCE，可以在“设置 -> SSL”将系统调整为不强制使用 SSL。</p>');
 		} else {
 			window.location.href = url;
 		}
