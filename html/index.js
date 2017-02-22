@@ -38,7 +38,7 @@ var Config = (function(url, callback) {
 })();
 // 检查 url 是否 https
 function checkHttps(url) {
-	if (url.includes(url)) {
+	if (url.includes('https://')) {
 		return true;
 	} else {
 		return false;
@@ -54,8 +54,7 @@ function pluginInsecure(url, callback) {
 		error: function(res) {
 			if (res.status === 0) {
 				callback(false);
-			}
-			else {
+			} else {
 				callback(true);
 			}
 		}
@@ -63,10 +62,8 @@ function pluginInsecure(url, callback) {
 }
 // 倒计时
 function countDown(el, callback) {
-	var count = 3;
+	var count = 2;
 	var timer = setInterval(function() {
-		console.log(count)
-		console.log(el);
 		$(el).html('(' + count + ')')
 		count --;
 		if (count === -1) {
@@ -78,14 +75,16 @@ function countDown(el, callback) {
 
 // 跳转
 function changeUrl(url) {
-	if (checkHttps(url)) {
+	if (!checkHttps(url)) {
 		pluginInsecure(url, function(res) {
 			if (res) {
 				window.location.href = url;
 			} else {
 				$("#myModal").modal('hide');
-				$('#tips').html('如果该页面无法显示，有可能是使用了自定义SSL证书。\
-可以<a class="url" href="' + url + '" target="_blank">打开此页面<span id="count"></span></a>，接受SSL证书解决');
+				var tips = $('<div style="text-align: center;font-size: 30px;font-weight: 400;" id="count">3</div>\
+					<div>如果无法显示。可以<a class="url" href="' + url + '" target="_blank">打开此页面</a>，接受 SSL 证书解决。</div>');
+
+				$('#tips').append(tips);
 				countDown($("#count"), function(){
 					window.location.href = url;
 				});
