@@ -64,7 +64,7 @@ function pluginInsecure(url, callback) {
 function countDown(el, callback) {
 	var count = 2;
 	var timer = setInterval(function() {
-		$(el).html('(' + count + ')')
+		$(el).html(count)
 		count --;
 		if (count === -1) {
 			clearInterval(timer);
