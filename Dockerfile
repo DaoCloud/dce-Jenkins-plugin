@@ -5,7 +5,7 @@ LABEL maintainer="Pike" \
       io.daocloud.dce.plugin.description="Jenkins 是一个可扩展的持续集成引擎" \
       io.daocloud.dce.plugin.categories="continuous-integration" \
       io.daocloud.dce.plugin.vendor="Community" \
-      io.daocloud.dce.plugin.required-dce-version=">=2.5.2” \
+      io.daocloud.dce.plugin.required-dce-version=">=2.5.2" \
       io.daocloud.dce.plugin.nano-cpus-limit="500000000" \
       io.daocloud.dce.plugin.memory-bytes-limit="52428800"
 
