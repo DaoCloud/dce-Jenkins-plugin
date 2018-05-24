@@ -1,2 +1,2 @@
 Flask==0.12
-dce-plugin-sdk
+dce-plugin-sdk==1.0
