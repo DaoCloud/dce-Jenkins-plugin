@@ -9,8 +9,7 @@ LABEL maintainer="Pike" \
       io.daocloud.dce.plugin.nano-cpus-limit="500000000" \
       io.daocloud.dce.plugin.memory-bytes-limit="52428800"
 
-RUN apk add --update \
-    nginx supervisor \
+RUN apk add --update nginx \
   && rm -rf /var/cache/apk/* \
   && ln -sf /dev/stdout /var/log/nginx/access.log \
   && ln -sf /dev/stderr /var/log/nginx/error.log
